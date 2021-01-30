@@ -1,0 +1,14 @@
+Rapport TME8 3I001
+QIAN Christian(3520242) & BALO Harun(3521435)
+
+Exo11:
+
+2) Soit on fait un join() sur les clients avec un interrupt() sur le serveur dans le main, 
+soit on ajoute un compteur sur le nombre de client en execution dans la classe Client que l'on décremente a chaque sortie de run Client: le dernier client arrete le thread serveur avant de se terminer
+
+5) Non, la boucle infinie des clients avec un indentifiant multiple de 3 bloque la progression des autres clients.
+
+6) On utilise un ArrayBlockingQueue pour stocker les requetes envoyées au serveur, celui attribut des servants a chaque requete dans ArrayBlockingQueue(sans attendre entre chaque requete) puis attend si la liste est vide, 
+on supprime la methode attendreRequete(inutile dans ce cas) la terminaison est possible car la methode take de ArrayBlockingQueue comporte un wait et avec interrupt a la fin du run Client.
+
+Le probleme de famine n'existe plus car tous les clients de type 1 peuvent finir leur execution mais la terminaison du programme n'est pas possible s'il y a un client de type 2 avec le boucle infinie dès la 1er requete.
